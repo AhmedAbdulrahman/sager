@@ -1,0 +1,9 @@
+*.md
+/.git
+/.storybook-static
+/coverage
+/tmp
+.next
+build
+node_modules
+yarn.lock
