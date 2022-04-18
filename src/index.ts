@@ -1,17 +1,26 @@
+import 'reflect-metadata'
+import * as tq from 'type-graphql'
 import { ApolloServer } from 'apollo-server-express'
 import { ApolloServerPluginDrainHttpServer } from 'apollo-server-core'
 import express from 'express'
 import http from 'http'
+import { resolvers } from '@generated/type-graphql'
+import { context } from './context'
 
 const main = async () => {
   // Required logic for integrating with Express
   const app = express()
   const httpServer = http.createServer(app)
 
+  const schema = await tq.buildSchema({
+    resolvers,
+    validate: false,
+  })
+
   // ApolloServer initialization, plus the drain plugin.
   const server = new ApolloServer({
-    typeDefs: [],
-    resolvers: [],
+    schema,
+    context: context,
     plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
   })
 
