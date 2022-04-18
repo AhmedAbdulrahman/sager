@@ -1,4 +1,9 @@
 dist
 node_modules
-# you should add that
-# .env
+.idea/
+.vscode/
+node_modules/
+build/
+tmp/
+temp/
+.env
